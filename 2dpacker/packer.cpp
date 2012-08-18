@@ -74,11 +74,11 @@ Packer::~Packer(){
 }
 
 /**
- * ƒpƒbƒN
- * @param[io] data_array: “ü—Íƒf[ƒ^
+ * ãƒ‘ãƒƒã‚¯
+ * @param[io] data_array: å…¥åŠ›ãƒ‡ãƒ¼ã‚¿
  */
 bool Packer::pack(DataArray& data_array){
-	// ƒ\[ƒg‚ðs‚¤
+	// ã‚½ãƒ¼ãƒˆã‚’è¡Œã†
 	std::sort(data_array.begin(), data_array.end(), Data::cmp_maxside);
 
 	try{
@@ -116,10 +116,10 @@ bool Packer::pack(DataArray& data_array){
 }
 
 /**
- * ƒm[ƒh‚Ì’Tõ
- * @param[i] root: ’TõŠJŽnƒm[ƒh
- * @param[i] data: Ši”[ƒf[ƒ^
- * @return ŒŸõðŒ‚É‡’v‚µ‚½ƒm[ƒh
+ * ãƒŽãƒ¼ãƒ‰ã®æŽ¢ç´¢
+ * @param[i] root: æŽ¢ç´¢é–‹å§‹ãƒŽãƒ¼ãƒ‰
+ * @param[i] data: æ ¼ç´ãƒ‡ãƒ¼ã‚¿
+ * @return æ¤œç´¢æ¡ä»¶ã«åˆè‡´ã—ãŸãƒŽãƒ¼ãƒ‰
  */
 Node* Packer::findNode(const Node* node, const Data* data){
 	Node* target = NULL;
@@ -142,10 +142,10 @@ Node* Packer::findNode(const Node* node, const Data* data){
 }
 
 /**
- * ƒm[ƒh‚Ì•ªŠ„
- * @param[i] node: •ªŠ„‘ÎÛƒm[ƒh
- * @param[i] data: Ši”[ƒf[ƒ^
- * @return node‚Æ“¯‚¶
+ * ãƒŽãƒ¼ãƒ‰ã®åˆ†å‰²
+ * @param[i] node: åˆ†å‰²å¯¾è±¡ãƒŽãƒ¼ãƒ‰
+ * @param[i] data: æ ¼ç´ãƒ‡ãƒ¼ã‚¿
+ * @return nodeã¨åŒã˜
  */
 Node* Packer::splitNode(Node* node, const Data* data){
 	node->use = true;
@@ -175,10 +175,10 @@ Node* Packer::splitNode(Node* node, const Data* data){
 }
 
 /**
- * ƒm[ƒh‚ðL‚°‚é
- * @param[i] data: Ši”[ƒf[ƒ^
- * @return ŒŸõðŒ‚É‡’v‚µ‚½ƒm[ƒh
- * @note ƒm[ƒh‚ðL‚°‚éÛ‚É‚È‚é‚×‚­³•ûŒ`‚É‹ß‚Ã‚­‚æ‚¤‚É‚·‚é
+ * ãƒŽãƒ¼ãƒ‰ã‚’åºƒã’ã‚‹
+ * @param[i] data: æ ¼ç´ãƒ‡ãƒ¼ã‚¿
+ * @return æ¤œç´¢æ¡ä»¶ã«åˆè‡´ã—ãŸãƒŽãƒ¼ãƒ‰
+ * @note ãƒŽãƒ¼ãƒ‰ã‚’åºƒã’ã‚‹éš›ã«ãªã‚‹ã¹ãæ­£æ–¹å½¢ã«è¿‘ã¥ãã‚ˆã†ã«ã™ã‚‹
  */
 Node* Packer::growNode(const Data* data){
 	const unsigned int w = calcActualSize(data->w);
@@ -199,15 +199,15 @@ Node* Packer::growNode(const Data* data){
 	const bool shouldGrowRight = canGrowRight && ((width + w) <= height);
 	const bool shouldGrowBottom = canGrowBottom && ((height + h) <= width);
 
-	if(shouldGrowRight)	// ‰E•ûŒü‚ÉL‚°‚é‚×‚«
+	if(shouldGrowRight)	// å³æ–¹å‘ã«åºƒã’ã‚‹ã¹ã
 		return growRight(data);
-	if(shouldGrowBottom)// ‰º•ûŒü‚ÉL‚°‚é‚×‚«
+	if(shouldGrowBottom)// ä¸‹æ–¹å‘ã«åºƒã’ã‚‹ã¹ã
 		return growBottom(data);
-	if(canGrowRight)	// ‰E•ûŒü‚ÉL‚°‚é‚±‚Æ‚ª‰Â”\
+	if(canGrowRight)	// å³æ–¹å‘ã«åºƒã’ã‚‹ã“ã¨ãŒå¯èƒ½
 		return growRight(data);
-	if(canGrowBottom)	// ‰º•ûŒü‚ÉL‚°‚é‚±‚Æ‚ª‰Â”\
+	if(canGrowBottom)	// ä¸‹æ–¹å‘ã«åºƒã’ã‚‹ã“ã¨ãŒå¯èƒ½
 		return growBottom(data);
-	return NULL;		// ƒ‹[ƒgƒm[ƒh‚Ì‘I•Ê‚É–â‘è‚ª‚ ‚é
+	return NULL;		// ãƒ«ãƒ¼ãƒˆãƒŽãƒ¼ãƒ‰ã®é¸åˆ¥ã«å•é¡ŒãŒã‚ã‚‹
 }
 
 Node* Packer::growRight(const Data* data){
@@ -229,7 +229,7 @@ Node* Packer::growRight(const Data* data){
 
 	if(node = findNode(root, data))
 		return splitNode(node, data);
-	return NULL;	// ’Êí‚Í“ž’B‚µ‚È‚¢
+	return NULL;	// é€šå¸¸ã¯åˆ°é”ã—ãªã„
 }
 
 Node* Packer::growBottom(const Data* data){
@@ -251,5 +251,5 @@ Node* Packer::growBottom(const Data* data){
 
 	if(node = findNode(root, data))
 		return splitNode(node, data);
-	return NULL;	// ’Êí‚Í“ž’B‚µ‚È‚¢
+	return NULL;	// é€šå¸¸ã¯åˆ°é”ã—ãªã„
 }

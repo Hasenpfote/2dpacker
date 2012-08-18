@@ -1,6 +1,6 @@
 /**
  * @file packer.h
- * @brief 二次元矩形パッキング
+ * @brief 莠梧ｬ｡蜈�遏ｩ蠖｢繝代ャ繧ｭ繝ｳ繧ｰ
  */
 #pragma once
 #include <vector>
@@ -51,7 +51,7 @@ public:
 	Data(unsigned int w, unsigned int h){ this->w = w; this->h = h; fit = NULL; }
 	Data(const std::string& path, unsigned int w, unsigned int h){ this->path = path; this->w = w; this->h = h; fit = NULL; }
 
-	// predicate function's(全て降順にする)
+	// predicate function's(蜈ｨ縺ｦ髯埼�縺ｫ縺吶ｋ)
 	static int cmp_w(const Data& l, const Data& r){
 		return static_cast<int>(r.w) - static_cast<int>(l.w);
 	}
