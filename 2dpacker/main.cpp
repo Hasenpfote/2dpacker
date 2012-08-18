@@ -62,7 +62,7 @@ static int getChannels(OutputFormatType type){
 }
 
 /**
- * €”õ
+ * æº–å‚™
  */
 static void setup(){
 	std::vector<std::string>::iterator it = input_images.begin();
@@ -80,10 +80,10 @@ static void setup(){
 }
 
 /**
- * o—ÍƒtƒH[ƒ}ƒbƒg‚ÉŠî‚Ã‚«“ü—Íƒf[ƒ^‚ğ’²®‚·‚é
+ * å‡ºåŠ›ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«åŸºã¥ãå…¥åŠ›ãƒ‡ãƒ¼ã‚¿ã‚’èª¿æ•´ã™ã‚‹
  */
 static void adjustmentImage(cv::Mat& img, int ch){
-	// BGR(A)‚É•ª—£
+	// BGR(A)ã«åˆ†é›¢
 	std::vector<cv::Mat> mv;
 	cv::split(img, mv);
 	if(img.channels() == 1){
@@ -117,13 +117,13 @@ static void adjustmentImage(cv::Mat& img, int ch){
 }
 
 /**
- * packer‚ÉŠî‚Ã‚«ƒCƒ[ƒW‚ğŒ‹‡‚·‚é
+ * packerã«åŸºã¥ãã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’çµåˆã™ã‚‹
  */
 static void combineImages(){
-	// o—ÍƒtƒH[ƒ}ƒbƒg‚Ì‘I•Ê
+	// å‡ºåŠ›ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®é¸åˆ¥
 	const int ch = getChannels(ofmt_type);
 	const int type = (ch == 4)? CV_8UC4 : CV_8UC3;
-	const cv::Scalar scalar = (ch == 4)? cv::Scalar(127, 127, 127, 255) : cv::Scalar(127, 127, 127);	// ‰ŠúF
+	const cv::Scalar scalar = (ch == 4)? cv::Scalar(127, 127, 127, 255) : cv::Scalar(127, 127, 127);	// åˆæœŸè‰²
 
 	cv::Mat dst(cv::Size(packer.getW(), packer.getH()), type, scalar);
 
@@ -150,7 +150,7 @@ static void combineImages(){
 		cv::putText(dst, size, cv::Point(it->fit->rect.getX(), it->fit->rect.getY() + 20), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(255, 255, 255), 1);
 #endif
 	}
-	// o—Í
+	// å‡ºåŠ›
 	if((om_type == OutputMode_WriteOnly) || (om_type == OutputMode_Both)){
 		bool ret = cv::imwrite(output_path, dst, params);
 	}
@@ -170,7 +170,7 @@ static void combineImages(){
 }
 
 /**
- * ƒGƒ“ƒgƒŠ
+ * ã‚¨ãƒ³ãƒˆãƒª
  */
 int main(int argc, char *argv[]){
 #if	0	// for debug
@@ -211,10 +211,10 @@ int main(int argc, char *argv[]){
 	argv = _argv;
 	argc = sizeof(_argv) / sizeof(_argv[0]);
 #endif
-	// {Fƒp[ƒT•¶š—ñ‚ÌŠJn
-	// }Fƒp[ƒT•¶š—ñ‚ÌI—¹
-	// |FƒZƒpƒŒ[ƒ^
-	// ƒVƒ‡[ƒgƒl[ƒ€Cƒtƒ‹ƒl[ƒ€CƒfƒtƒHƒ‹ƒg’lCƒwƒ‹ƒv•¶
+	// {ï¼šãƒ‘ãƒ¼ã‚µæ–‡å­—åˆ—ã®é–‹å§‹
+	// }ï¼šãƒ‘ãƒ¼ã‚µæ–‡å­—åˆ—ã®çµ‚äº†
+	// |ï¼šã‚»ãƒ‘ãƒ¬ãƒ¼ã‚¿
+	// ã‚·ãƒ§ãƒ¼ãƒˆãƒãƒ¼ãƒ ï¼Œãƒ•ãƒ«ãƒãƒ¼ãƒ ï¼Œãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ï¼Œãƒ˜ãƒ«ãƒ—æ–‡
 	const char* keys = {
 		"{i|input     |      |input files}"
 		"{o|output    |      |output file}"
@@ -258,7 +258,7 @@ int main(int argc, char *argv[]){
 		}
 #endif
 	}
-	// o—Íİ’è
+	// å‡ºåŠ›è¨­å®š
 	padding = param_pad;
 	aligned = param_aln;
 	output_path = param_o;
@@ -292,10 +292,10 @@ int main(int argc, char *argv[]){
 		om_type = OutputMode_DisplayOnly;
 	}
 
-	// €”õ‚ğs‚¤
+	// æº–å‚™ã‚’è¡Œã†
 	setup();
 
-	// ƒpƒbƒLƒ“ƒO
+	// ãƒ‘ãƒƒã‚­ãƒ³ã‚°
 	packer.setPadding(padding);
 	packer.setAligned(aligned);
 	if(!packer.pack(inputs)){
@@ -303,7 +303,7 @@ int main(int argc, char *argv[]){
 		return EXIT_FAILURE;
 	}
 
-	// ‰æ‘œ‚Ì‡¬
+	// ç”»åƒã®åˆæˆ
 	combineImages();
 
 	cv::waitKey(0);
